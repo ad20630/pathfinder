@@ -1,6 +1,6 @@
 # Pathfinder
 
-**A map of jobs, retraining and support for workers displaced by AI and automation.**
+**A map of jobs, training and support for workers displaced by AI and automation.**
 
 Displacement hits specific towns. Pathfinder shows a worker exactly where to land and what to learn:
 describe your old job in plain language and Gemini works out your transferable skills, builds a short
