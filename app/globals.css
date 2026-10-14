@@ -24,3 +24,16 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Pulsing ring for search-result markers */
+.pin-hit {
+  animation: pin-pulse 1.4s ease-out infinite;
+}
+@keyframes pin-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 18px rgba(250, 204, 21, 0);
+  }
+}

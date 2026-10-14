@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: h4h
+      POSTGRES_PASSWORD: h4h
+      POSTGRES_DB: h4h
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    profiles: ["full"] # run with: docker compose --profile full up
+    environment:
+      DATABASE_URL: postgres://h4h:h4h@db:5432/h4h
+    env_file: .env.local
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
