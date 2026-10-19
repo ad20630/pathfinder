@@ -258,7 +258,9 @@ export function ResourceMap() {
       </header>
 
       {adding || finding ? (
-        <div className="absolute inset-x-0 bottom-0 z-[1000] max-h-[45%] overflow-y-auto rounded-t-xl bg-white p-4 shadow-2xl sm:inset-x-auto sm:bottom-4 sm:left-4 sm:w-80 sm:rounded-xl dark:bg-zinc-950">
+        <div
+          className={`absolute inset-x-0 bottom-0 z-[1000] overflow-y-auto rounded-t-xl ${adding ? "max-h-full" : "max-h-[45%]"} bg-white p-4 shadow-2xl sm:inset-x-auto sm:bottom-4 sm:left-4 sm:w-80 sm:rounded-xl dark:bg-zinc-950`}
+        >
           {adding ? (
             <AddResourceForm
               draft={draft}
@@ -276,13 +278,13 @@ export function ResourceMap() {
       ) : (
         <div className="absolute bottom-6 left-1/2 z-[1000] flex -translate-x-1/2 gap-2">
           <button
-            className="rounded-full bg-violet-600 px-5 py-3 font-medium text-white shadow-lg"
+            className="rounded-full bg-violet-600 px-4 py-1.5 text-sm font-medium text-white shadow-lg sm:px-5 sm:py-3 sm:text-base"
             onClick={() => setFinding(true)}
           >
             {scenario.ui.findLabel}
           </button>
           <button
-            className="rounded-full bg-blue-600 px-5 py-3 font-medium text-white shadow-lg"
+            className="rounded-full bg-blue-600 px-4 py-1.5 text-sm font-medium text-white shadow-lg sm:px-5 sm:py-3 sm:text-base"
             onClick={() => setAdding(true)}
           >
             {scenario.ui.addLabel}
