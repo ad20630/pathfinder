@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Spinner } from "./Spinner";
 import { scenario } from "@/config/scenario";
 
 export type Draft = {
@@ -36,11 +37,13 @@ type Props = {
 export function AddResourceForm({ draft, onChange, hasLocation, approximate, onSubmit, onCancel, onAiParsed }: Props) {
   const [aiText, setAiText] = useState("");
   const [busy, setBusy] = useState(false);
+  const [aiBusy, setAiBusy] = useState(false);
   const [error, setError] = useState("");
   const set = (patch: Partial<Draft>) => onChange({ ...draft, ...patch });
 
   async function runAi() {
     setBusy(true);
+    setAiBusy(true);
     setError("");
     try {
       const res = await fetch("/api/parse", {
@@ -56,6 +59,7 @@ export function AddResourceForm({ draft, onChange, hasLocation, approximate, onS
       setError(e instanceof Error ? e.message : "AI parse failed");
     } finally {
       setBusy(false);
+      setAiBusy(false);
     }
   }
 
@@ -86,11 +90,11 @@ export function AddResourceForm({ draft, onChange, hasLocation, approximate, onS
             onChange={(e) => setAiText(e.target.value)}
           />
           <button
-            className="rounded bg-violet-600 px-3 text-sm text-white disabled:opacity-50"
+            className="flex min-w-10 items-center justify-center rounded bg-violet-600 px-3 text-sm text-white disabled:opacity-50"
             disabled={busy || !aiText.trim()}
             onClick={runAi}
           >
-            ✨
+            {aiBusy ? <Spinner /> : "✨"}
           </button>
         </div>
       </div>

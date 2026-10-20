@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { scenario, statusInfo, typeInfo } from "@/config/scenario";
 import type { Resource } from "@/db/schema";
+import { Spinner } from "./Spinner";
 
 export type SearchResult = {
   answer: string;
@@ -54,10 +55,10 @@ export function FindResourcePanel({ onSearch, result, onSelect, onClose }: Props
         />
         <button
           type="submit"
-          className="rounded bg-violet-600 px-3 text-sm font-medium text-white disabled:opacity-50"
+          className="flex min-w-12 items-center justify-center rounded bg-violet-600 px-3 text-sm font-medium text-white disabled:opacity-50"
           disabled={busy || !query.trim()}
         >
-          {busy ? "…" : "Go"}
+          {busy ? <Spinner /> : "Go"}
         </button>
       </form>
 
