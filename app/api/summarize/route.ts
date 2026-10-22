@@ -49,7 +49,8 @@ export async function POST(req: NextRequest) {
       contents:
         `Context: ${scenario.aiContext}. Write a plain 1-2 sentence description (max 40 words) of this map marker ` +
         `for ${scenario.ui.summaryAudience}: what it is, who it suits (use the skills) and anything key like pay or cost. ` +
-        `Briefly note how fresh the information is. Use only the facts given; do not invent details.\n\n${JSON.stringify(facts)}`,
+        `Briefly note how fresh the information is, expressing the time since last update in minutes if under 60 minutes, ` +
+        `in hours if under 24 hours, and in days otherwise. Use only the facts given; do not invent details.\n\n${JSON.stringify(facts)}`,
     });
     const summary = res.text?.trim() ?? "";
     if (summary) cache.set(cacheKey, summary);
