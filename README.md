@@ -13,7 +13,7 @@ plan (including an AI-literacy step), and highlights matching openings, classes 
 - **Find my next step**: describe your background, get your transferable skills, a 2-4 step plan, and matches highlighted on the map.
 - **AI description on every marker**: Gemini writes a short description from the listing's fields.
 - **Post an opportunity**: type it in your own words ("Hiring 10 forklift operators near Old Milton Pkwy, $22/hr"); Gemini fills the form and the place is geocoded and pinned.
-- **Live-ish map**: every client re-fetches markers every 5 seconds. "Still accurate" confirmations keep listings fresh; stale ones expire after 30 days.
+- **Live-ish map**: every client re-fetches markers every 5 seconds. Clicking "Update" on a marker's popup confirms the listing (and saves any status change picked in the dropdown; the dropdown alone doesn't save). Updates keep listings fresh; stale ones expire after 30 days.
 - **Degrades gracefully**: if Gemini is unavailable or out of quota, search falls back to keyword matching and popups show the original text.
 
 ## Stack

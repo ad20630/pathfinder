@@ -45,7 +45,7 @@ export const scenario = {
       "Bookkeeper who wants to learn AI tools",
     ],
     postPlaceholder: "Hiring 10 forklift operators near Old Milton Pkwy, $22/hr",
-    confirmLabel: "✓ Still accurate",
+    confirmLabel: "Update",
     summaryAudience: "a worker displaced by automation",
   },
 };

@@ -60,6 +60,28 @@ function Summary({ r }: { r: Resource }) {
   return <p>✨ {data.summary}</p>;
 }
 
+// The status dropdown only changes a local draft; nothing is saved until "Update" is clicked
+function PopupActions({ r, patch }: { r: Resource; patch: (id: string, body: object) => Promise<void> }) {
+  const [status, setStatus] = useState(r.status);
+  return (
+    <>
+      <button
+        className="rounded bg-green-600 px-2 py-1 text-xs text-white"
+        onClick={() => patch(r.id, { confirm: true, ...(status !== r.status && { status }) })}
+      >
+        {scenario.ui.confirmLabel} ({r.confirmations})
+      </button>
+      <select className="rounded border px-1 py-1 text-xs" value={status} onChange={(e) => setStatus(e.target.value)}>
+        {scenario.statuses.map((st) => (
+          <option key={st.id} value={st.id}>
+            {st.label}
+          </option>
+        ))}
+      </select>
+    </>
+  );
+}
+
 export function ResourceMap() {
   const [map, setMap] = useState<L.Map | null>(null);
   const [filter, setFilter] = useState<string | null>(null);
@@ -211,23 +233,7 @@ export function ResourceMap() {
                   )}
                   {r.contact && <p className="text-xs">Contact: {r.contact}</p>}
                   <div className="flex flex-wrap items-center gap-2 pt-1">
-                    <button
-                      className="rounded bg-green-600 px-2 py-1 text-xs text-white"
-                      onClick={() => patch(r.id, { confirm: true })}
-                    >
-                      {scenario.ui.confirmLabel} ({r.confirmations})
-                    </button>
-                    <select
-                      className="rounded border px-1 py-1 text-xs"
-                      value={r.status}
-                      onChange={(e) => patch(r.id, { status: e.target.value })}
-                    >
-                      {scenario.statuses.map((st) => (
-                        <option key={st.id} value={st.id}>
-                          {st.label}
-                        </option>
-                      ))}
-                    </select>
+                    <PopupActions r={r} patch={patch} />
                   </div>
                 </div>
               </Popup>
